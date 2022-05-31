@@ -128,6 +128,17 @@ const createUser = async (req, res) => {
     try {
         const { name, email, password } = req.body;
 
+        const existUser = User.find({email});
+        console.log(existUser);
+
+        if(existUser) {
+            return res.json({ 
+                success:false,
+                message: 'User email already exists',
+                data: []
+            });
+        }
+
         const user = new User({
             name,
             email,
