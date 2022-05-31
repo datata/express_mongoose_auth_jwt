@@ -8,6 +8,7 @@ const { mongoose } = require('./config/database');
 const port = process.env.PORT || 3000;
 
 app.use(morgan('dev'));
+app.use(express.json());
 
 app.use('/api', require('./routes/user.routes'));
 
