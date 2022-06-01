@@ -129,7 +129,6 @@ const createUser = async (req, res) => {
         const { name, email, password } = req.body;
 
         const existUser = User.find({email});
-        console.log(existUser);
 
         if(existUser) {
             return res.json({ 
