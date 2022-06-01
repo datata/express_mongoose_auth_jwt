@@ -124,47 +124,9 @@ const deleteUserByid = async (req, res) => {
     }
 }
 
-const createUser = async (req, res) => {
-    try {
-        const { name, email, password } = req.body;
-
-        const existUser = await User.findOne({email});
-
-        if(existUser) {
-            return res.json({ 
-                success:false,
-                message: 'User email already exists',
-                data: []
-            });
-        }
-
-        const user = new User({
-            name,
-            email,
-            password
-        });
-
-        await user.save();
-
-        return res.json({
-            success: true,
-            message: 'User created',
-            data: user 
-        });  
-    } catch (error) {
-        return res.json({ 
-            success:false, 
-            message: {
-                error: 'Error creating user'
-            }
-        });
-    }
-}
-
 module.exports = {
     getAllUsers,
     getUserById,
     updateUserByid,
     deleteUserByid,
-    createUser
 };
