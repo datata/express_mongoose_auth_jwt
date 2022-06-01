@@ -101,7 +101,37 @@ const login = async (req, res) => {
     }
 };
 
+const me = async (req, res) => {
+    try {
+        const { userId } = req;
+
+        const user = await User.findById(userId).select(['-password']);
+
+        if (!user) {
+            return res.json({
+                success: false,
+                message: 'User not found',
+                data: []
+            });
+        }
+
+        return res.json({
+            success: true,
+            message: 'User retrieved successfully',
+            data: user
+        });
+    } catch (error) {
+        return res.json({
+            success: false,
+            message: {
+                error: 'Error retrieving user'
+            }
+        });
+    }
+};
+
 module.exports = {
     register,
-    login
+    login,
+    me
 };

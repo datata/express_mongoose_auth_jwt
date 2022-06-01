@@ -11,10 +11,10 @@ router.get('/user/:id', auth, UserController.getUserById);
 
 router.put('/user/:id', auth, UserController.updateUserByid);
 
-router.post('/user', authController.register);
-
 router.delete('/user/:id', auth, UserController.deleteUserByid);
 
-router.post('/login', authController.login);
+router.post('/auth/login', authController.login);
+router.post('/auth/register', authController.register);
+router.get('/auth/me', auth, authController.me);
 
 module.exports = router;
